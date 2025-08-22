@@ -1,0 +1,274 @@
+name: HelloAI 日报发布流程
+
+env:
+  UV_CACHE_DIR: /tmp/.cache/uv
+  PYTHON_VERSION: "3.11"
+  GIT_TERMINAL_PROMPT: 0
+
+permissions:
+  contents: write
+  actions: read
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'articles/**'
+  workflow_dispatch:
+    inputs:
+      force_publish_latest:
+        description: '强制发布最后一篇文章'
+        required: false
+        default: false
+        type: boolean
+      platforms:
+        description: '选择发布平台 (多选用逗号分隔: wechat,juejin,zhihu)'
+        required: false
+        default: 'wechat,juejin,zhihu'
+        type: string
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.changes.outputs.has-changes }}
+      changed-articles: ${{ steps.changes.outputs.changed-articles }}
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+    
+    - name: 检测文章变更
+      id: changes
+      run: |
+        if [ "${{ github.event.inputs.force_publish_latest }}" == "true" ]; then
+          # 强制发布模式：获取最后一篇文章
+          LATEST_ARTICLE=$(find articles -name "index.md" -type f | sort -r | head -1)
+          if [ -n "$LATEST_ARTICLE" ]; then
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+            echo "changed-articles=$LATEST_ARTICLE" >> $GITHUB_OUTPUT
+            echo "🚀 强制发布模式：将发布最后一篇文章"
+            echo "📝 文章路径: $LATEST_ARTICLE"
+          else
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "❌ 未找到任何文章"
+          fi
+        else
+          # 正常模式：检测新增或修改的文章
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep "articles/.*index\.md" || true)
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+            echo "changed-articles=$CHANGED_FILES" >> $GITHUB_OUTPUT
+            echo "📝 检测到文章变更:"
+            echo "$CHANGED_FILES"
+          else
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ 未检测到文章变更"
+          fi
+        fi
+
+  publish-platforms:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has-changes == 'true'
+    runs-on: self-hosted
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+        enable-cache: true
+    
+    - name: Set up Python
+      run: uv python install ${{ env.PYTHON_VERSION }}
+    
+    - name: Install dependencies
+      run: |
+        uv sync
+    
+    - name: 恢复掘金令牌缓存
+      uses: actions/cache@v4
+      with:
+        path: config/juejin_tokens.enc
+        key: juejin-tokens-${{ github.repository }}-${{ runner.os }}
+        restore-keys: |
+          juejin-tokens-${{ github.repository }}-
+          juejin-tokens-
+    
+    - name: 创建发布摘要
+      run: |
+        uv run python scripts/create_summary.py "${{ needs.detect-changes.outputs.changed-articles }}"
+    
+    - name: 发布到微信公众号
+      env:
+        WECHAT_APP_ID: ${{ secrets.WECHAT_APP_ID }}
+        WECHAT_APP_SECRET: ${{ secrets.WECHAT_APP_SECRET }}
+        AUTHOR_NAME: ${{ vars.AUTHOR_NAME }}
+        SOURCE_URL: ${{ vars.SOURCE_URL }}
+      run: |
+        # 检查是否选择了微信平台
+        SELECTED_PLATFORMS="${{ github.event.inputs.platforms || 'wechat,juejin,zhihu' }}"
+        if [[ "$SELECTED_PLATFORMS" == *"wechat"* ]]; then
+          if [ -n "$WECHAT_APP_ID" ] && [ -n "$WECHAT_APP_SECRET" ]; then
+            echo "🔄 发布到微信公众号..."
+            uv run python scripts/wechat_publisher.py
+          else
+            echo "⏭️ 跳过微信公众号发布（未配置相关 secrets）"
+          fi
+        else
+          echo "⏭️ 跳过微信公众号发布（未在选择的平台中）"
+          # 不生成结果文件，让 update_published_record.py 自然处理为跳过状态
+        fi
+    
+    - name: 发布到掘金
+      env:
+        JUEJIN_SESSION_ID: ${{ secrets.JUEJIN_SESSION_ID }}
+        JUEJIN_CSRF_TOKEN: ${{ secrets.JUEJIN_CSRF_TOKEN }}
+        JUEJIN_COLUMN_ID: ${{ secrets.JUEJIN_COLUMN_ID }}
+        JUEJIN_ENCRYPTION_KEY: ${{ secrets.JUEJIN_ENCRYPTION_KEY }}
+      run: |
+        # 检查是否选择了掘金平台
+        SELECTED_PLATFORMS="${{ github.event.inputs.platforms || 'wechat,juejin,zhihu' }}"
+        if [[ "$SELECTED_PLATFORMS" == *"juejin"* ]]; then
+          if [ -n "$JUEJIN_SESSION_ID" ] && [ -n "$JUEJIN_CSRF_TOKEN" ] && [ -n "$JUEJIN_ENCRYPTION_KEY" ]; then
+            echo "🔄 发布到掘金..."
+            uv run python scripts/juejin_publisher.py
+            
+            # 显示缓存文件状态
+            if [ -f "config/juejin_tokens.enc" ]; then
+              echo "✅ 掘金令牌缓存已更新"
+            else
+              echo "⚠️ 掘金令牌缓存文件未生成"
+            fi
+          else
+            echo "⏭️ 跳过掘金发布（未配置相关 secrets）"
+          fi
+        else
+          echo "⏭️ 跳过掘金发布（未在选择的平台中）"
+          # 不生成结果文件，让 update_published_record.py 自然处理为跳过状态
+        fi
+        
+    - name: 发布到知乎
+      env:
+        ZHIHU_USERNAME: ${{ secrets.ZHIHU_USERNAME }}
+        ZHIHU_PASSWORD: ${{ secrets.ZHIHU_PASSWORD }}
+      run: |
+        # 检查是否选择了知乎平台
+        SELECTED_PLATFORMS="${{ github.event.inputs.platforms || 'wechat,juejin,zhihu' }}"
+        if [[ "$SELECTED_PLATFORMS" == *"zhihu"* ]]; then
+          if [ -n "$ZHIHU_USERNAME" ] && [ -n "$ZHIHU_PASSWORD" ]; then
+            echo "🔄 发布到知乎..."
+            uv run python scripts/zhihu_publisher.py
+          else
+            echo "⏭️ 跳过知乎发布（未配置相关 secrets）"
+          fi
+        else
+          echo "⏭️ 跳过知乎发布（未在选择的平台中）"
+          # 不生成结果文件，让 update_published_record.py 自然处理为跳过状态
+        fi
+    
+    - name: 更新发布记录
+      run: |
+        uv run python scripts/update_published_record.py
+        
+    - name: 提交发布记录更新
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # 配置 Git 用户信息
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # 优化 Git 网络配置
+        git config --local http.version HTTP/1.1
+        git config --local http.postBuffer 524288000
+        git config --local http.lowSpeedLimit 0
+        git config --local http.lowSpeedTime 999999
+        
+        # 设置远程 URL 使用 token 认证
+        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+        
+        # 提交变更
+        if git add config/published.json && git diff --staged --quiet; then
+          echo "📄 没有发布记录需要更新"
+          exit 0
+        fi
+        
+        git commit -m "📊 更新发布记录: $(date '+%Y-%m-%d %H:%M:%S')" || {
+          echo "⚠️ 提交失败或无变更，继续执行"
+          exit 0
+        }
+        
+        # 重试推送逻辑
+        echo "🔄 开始推送发布记录更新..."
+        for i in {1..5}; do
+          if git push origin HEAD:main; then
+            echo "✅ 推送成功 (尝试 $i/5)"
+            break
+          else
+            echo "❌ 推送失败 (尝试 $i/5)"
+            if [ $i -eq 5 ]; then
+              echo "🚨 所有推送尝试失败，请检查网络连接和权限"
+              echo "📋 Git 状态信息:"
+              git status
+              echo "📋 远程信息:"
+              git remote -v
+              exit 1
+            fi
+            echo "⏳ 等待 $((i * 3)) 秒后重试..."
+            sleep $((i * 3))
+          fi
+        done
+    
+    - name: 验证推送结果
+      if: always()
+      run: |
+        echo "🔍 验证推送结果..."
+        git fetch origin main
+        LOCAL_COMMIT=$(git rev-parse HEAD)
+        REMOTE_COMMIT=$(git rev-parse origin/main)
+        
+        if [ "$LOCAL_COMMIT" = "$REMOTE_COMMIT" ]; then
+          echo "✅ 本地和远程分支同步成功"
+        else
+          echo "⚠️ 本地和远程分支不同步"
+          echo "本地提交: $LOCAL_COMMIT"
+          echo "远程提交: $REMOTE_COMMIT"
+        fi
+
+  notify-completion:
+    needs: [detect-changes, publish-platforms]
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 发送成功通知
+      if: needs.publish-platforms.result == 'success'
+      run: |
+        if [ "${{ github.event.inputs.force_publish_latest }}" == "true" ]; then
+          echo "🎉 HelloAI 日报强制发布成功!"
+          echo "📝 已强制发布文章: ${{ needs.detect-changes.outputs.changed-articles }}"
+        else
+          echo "🎉 HelloAI 日报发布成功!"
+          echo "📝 已发布文章: ${{ needs.detect-changes.outputs.changed-articles }}"
+        fi
+        
+    - name: 发送失败通知
+      if: needs.publish-platforms.result == 'failure'
+      run: |
+        if [ "${{ github.event.inputs.force_publish_latest }}" == "true" ]; then
+          echo "❌ HelloAI 日报强制发布失败!"
+          echo "🔍 请检查日志排查问题"
+        else
+          echo "❌ HelloAI 日报发布失败!"
+          echo "🔍 请检查日志排查问题"
+        fi
