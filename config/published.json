@@ -1,0 +1,27 @@
+{
+  "2025/08-23/index.md": {
+    "title": "ai.HelloDev.io AI日报 - 第 1 期 (2025 年 08 月 23 日)",
+    "content_hash": "",
+    "last_updated": "2025-08-23T15:54:27.150208",
+    "platforms": {
+      "wechat": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      },
+      "juejin": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      },
+      "zhihu": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      }
+    }
+  }
+}
