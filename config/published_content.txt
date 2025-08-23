@@ -1,0 +1,27 @@
+2025-08-23|Introducing gpt-oss|AI模型,开源,推理能力|https://openai.com/index/introducing-gpt-oss/
+2025-08-23|Introducing ChatGPT agent: bridging research and action|Product,Release|https://openai.com/index/introducing-chatgpt-agent/
+2025-08-23|Introducing GPT-5|ai_research,chatgpt,2025|https://openai.com/index/introducing-gpt-5/
+2025-08-23|GPT-5 and the new era of work|ai_research,2025,chatgpt|https://openai.com/index/gpt-5-new-era-of-work/
+2025-08-23|dair-ai/ML-YouTube-Courses|nlp,data-science,machine-learning|https://github.com/dair-ai/ML-YouTube-Courses
+2025-08-23|rasbt/MachineLearning-QandAI-book|machine-learning,deep-neural-networks,ai|https://github.com/rasbt/MachineLearning-QandAI-book
+2025-08-23|lutzroeder/netron|AI可视化,神经网络,深度学习|https://github.com/lutzroeder/netron
+2025-08-23|dair-ai/ML-Course-Notes|machine-learning,deep-learning,natural-language-processing|https://github.com/dair-ai/ML-Course-Notes
+2025-08-23|krishnakumarsekar/awesome-quantum-machine-learning|machine-learning,awesome,ai|https://github.com/krishnakumarsekar/awesome-quantum-machine-learning
+2025-08-23|stas00/ml-engineering|training,machine-learning,ai|https://github.com/stas00/ml-engineering
+2025-08-23|dair-ai/ML-Notebooks|python,machine-learning,ai|https://github.com/dair-ai/ML-Notebooks
+2025-08-23|replicate/cog: Containers for machine learning|docker,machine-learning,ai|https://github.com/replicate/cog
+2025-08-23|Rachel James, AbbVie: Harnessing AI for corporate cybersecurity|AI in Action,Artificial Intelligence,Cybersecurity AI|https://www.artificialintelligence-news.com/news/rachel-james-abbvie-harnessing-ai-for-corporate-cybersecurity/
+2025-08-23|Huawei Cloud's broad, open approach wins it Gartner honours|AI in Action,AI Market Trends,Open-Source & Democratised AI|https://www.artificialintelligence-news.com/news/huawei-clouds-open-approach-wins-it-gartner-honours-magic-quadrant-2025-for-container-management/
+2025-08-23|Proton's privacy-first Lumo AI assistant gets a major upgrade|AI and Us,Artificial Intelligence,Human-AI Relationships|https://www.artificialintelligence-news.com/news/proton-privacy-lumo-ai-assistant-major-upgrade/
+2025-08-23|How AI servers are transforming Taiwan's electronics manufacturing giants|AI Hardware & Chips,AI Market Trends,Deep Dives|https://www.artificialintelligence-news.com/news/ai-servers-transform-taiwan-manufacturing-giants/
+2025-08-23|Gen AI makes no financial difference in 95% of cases|Artificial Intelligence|https://www.artificialintelligence-news.com/news/gen-ai-makes-no-financial-difference-in-95-of-cases/
+2025-08-23|Prompt Orchestration Markup Language|Prompt Engineering,Large Language Models,Markup Language|https://arxiv.org/abs/2508.13948
+2025-08-23|Intern-S1: A Scientific Multimodal Foundation Model|AI,Machine Learning,Multimodal Model|https://arxiv.org/abs/2508.15763
+2025-08-23|DINOv3|计算机视觉,自监督学习,AI模型|https://arxiv.org/abs/2508.10104
+2025-08-23|Qwen-Image Technical Report|Computer Vision,Image Generation,AI Model|https://arxiv.org/abs/2508.02324
+2025-08-23|Steve.AI|Video editing,AI Generative Art|https://www.producthunt.com/products/steve-ai
+2025-08-23|MemSync|Chrome Extensions,Productivity,Artificial Intelligence|https://www.producthunt.com/products/memsync
+2025-08-23|Dream Story Live - AI Journaling App|AI,Journaling,Self-reflection|https://www.producthunt.com/products/dream-story
+2025-08-23|PicDoc|AI,设计工具,内容创作|https://www.producthunt.com/products/picdoc
+2025-08-23|Figma|设计工具,协作,UI/UX|https://www.producthunt.com/products/figma/shoutouts
+2025-08-23|OpenAI|LLMs,AI Chatbots,AI Infrastructure Tools|https://www.producthunt.com/products/openai
