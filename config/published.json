@@ -23,5 +23,30 @@
         "message": "未配置认证信息，跳过发布"
       }
     }
+  },
+  "2025/08-24/index.md": {
+    "title": "未知标题",
+    "content_hash": "",
+    "last_updated": "2025-08-24T20:51:14.579437",
+    "platforms": {
+      "wechat": {
+        "published": true,
+        "published_time": "2025-08-24T20:51:14.579437",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "juejin": {
+        "published": true,
+        "published_time": "2025-08-24T20:51:14.579437",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "zhihu": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      }
+    }
   }
 }
