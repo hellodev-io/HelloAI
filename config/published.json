@@ -48,5 +48,30 @@
         "message": "未配置认证信息，跳过发布"
       }
     }
+  },
+  "2025/08-26/index.md": {
+    "title": "ai.HelloDev.io AI 产品速递 - 第 3 期 (2025 年 08 月 26 日)",
+    "content_hash": "",
+    "last_updated": "2025-08-26T23:48:41.361684",
+    "platforms": {
+      "wechat": {
+        "published": true,
+        "published_time": "2025-08-26T23:48:41.361684",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "juejin": {
+        "published": true,
+        "published_time": "2025-08-26T23:48:41.361684",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "zhihu": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      }
+    }
   }
 }
