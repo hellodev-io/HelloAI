@@ -1,18 +1,20 @@
-2025-08-28|Webvizio for AI Coding Agents|https://www.producthunt.com/products/webvizio
-2025-08-28|Rube|https://www.producthunt.com/products/rube
-2025-08-28|SoWork: The Glow-Up Edition|https://www.producthunt.com/products/sowork
-2025-08-28|Trace|https://www.producthunt.com/products/trace-16
-2025-08-28|Roark|https://www.producthunt.com/products/roark
-2025-08-28|Gemini 2.5 Flash Image|https://www.producthunt.com/products/google
-2025-08-28|Conductor|https://www.producthunt.com/products/conductor-aa77ddef-e6d3-4805-a179-7b2e17b6e22e
-2025-08-28|Tot 2.0|https://www.producthunt.com/products/tot
-2025-08-28|NotchFlow|https://www.producthunt.com/products/notchflow
-2025-08-28|Hex Notebook Agent|https://www.producthunt.com/products/hex
-2025-08-28|NotchFlow|https://www.producthunt.com/products/notchflow
-2025-08-28|TaskGPT Mobile|https://www.producthunt.com/products/taskgpt-2
-2025-08-28|CodeX|https://www.producthunt.com/products/codex-6
-2025-08-28|Codalogy|https://www.producthunt.com/products/codalogy
-2025-08-28|Oppla AI IDE|https://www.producthunt.com/products/oppla-ai
-2025-08-28|doola: AI Co-Founder|https://www.producthunt.com/products/doola-ai-co-founder
-2025-08-28|Magic Sandbox|https://www.producthunt.com/products/magic-sandbox-2
-2025-08-28|Higgsfield Records|https://www.producthunt.com/products/higgsfield
+2025-08-29|Marblism|https://www.producthunt.com/products/marblism-2
+2025-08-29|KomikoAI Video to Video|https://www.producthunt.com/products/framepack-ai-video-generator
+2025-08-29|HiveMind|https://www.producthunt.com/products/hivemind-ai
+2025-08-29|Macrowave|https://www.producthunt.com/products/macrowave
+2025-08-29|brek.ai|https://www.producthunt.com/products/brek-ai
+2025-08-29|Eternal AI|https://www.producthunt.com/products/nobullshit-exe
+2025-08-29|Dreambase.ai|https://www.producthunt.com/products/dreambase-ai
+2025-08-29|apiJuice|https://www.producthunt.com/products/apijuice
+2025-08-29|Qwen Chat|https://www.producthunt.com/products/qwq-max
+2025-08-29|Stratify AI|https://www.producthunt.com/products/stratify-ai-2
+2025-08-29|Stratify AI|https://www.producthunt.com/products/stratify-ai-2
+2025-08-29|Air MCP|https://www.producthunt.com/products/air-mcp
+2025-08-29|ManabiDojo|https://www.producthunt.com/products/manabidojo
+2025-08-29|Autobound for Clay & n8n|https://www.producthunt.com/products/autobound
+2025-08-29|First Answer|https://www.producthunt.com/products/first-answer
+2025-08-29|NeuralAgent|https://www.producthunt.com/products/neuralagent
+2025-08-29|SongBoard|https://www.producthunt.com/products/songboard
+2025-08-29|Webvizio for AI Coding Agents|https://www.producthunt.com/products/webvizio
+2025-08-29|SoWork: The Glow-Up Edition|https://www.producthunt.com/products/sowork
+2025-08-29|Rube|https://www.producthunt.com/products/rube
