@@ -38,48 +38,97 @@ def filter_article_files(files: List[str]) -> List[str]:
 
 
 def extract_article_info(article_path: str) -> Optional[Dict]:
-    """提取文章信息"""
+    """提取文章信息（优化版，支持元信息读取）"""
     if not os.path.exists(article_path):
         return None
     
     try:
+        # 读取文章内容
         with open(article_path, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # 提取标题（第一个# 标题）
-        lines = content.split('\n')
-        title = None
-        for line in lines:
-            if line.startswith('# '):
-                title = line[2:].strip()
-                break
+        # 文章目录路径
+        article_dir = os.path.dirname(article_path)
+        meta_path = os.path.join(article_dir, 'meta.json')
         
-        # 从路径提取日期
-        path_parts = article_path.split('/')
-        if len(path_parts) >= 3:
-            date_part = path_parts[2]  # 格式如 01-29
-            year = path_parts[1]       # 格式如 2025
-            date_str = f"{year}-{date_part}"
+        # 优先从 meta.json 读取信息
+        meta_info = {}
+        if os.path.exists(meta_path):
+            try:
+                with open(meta_path, 'r', encoding='utf-8') as f:
+                    meta_info = json.load(f)
+                print(f"  📄 读取到元信息: {os.path.basename(article_dir)}")
+            except Exception as e:
+                print(f"  ⚠️ 元信息读取失败: {e}")
+        
+        # 提取标题（优先使用元信息，否则从内容提取）
+        if meta_info.get('full_title'):
+            title = meta_info['full_title']
         else:
-            date_str = datetime.now().strftime("%Y-%m-%d")
+            # 从内容提取标题（第一个# 标题）
+            lines = content.split('\n')
+            title = None
+            for line in lines:
+                if line.startswith('# '):
+                    title = line[2:].strip()
+                    break
+            title = title or '未知标题'
         
-        # 检查是否有图片
-        images_dir = os.path.dirname(article_path) + '/images'
+        # 日期信息（优先使用元信息）
+        if meta_info.get('publish_date'):
+            date_str = meta_info['publish_date']
+        else:
+            # 从路径提取日期
+            path_parts = article_path.split('/')
+            if len(path_parts) >= 3:
+                date_part = path_parts[2]  # 格式如 08-28
+                year = path_parts[1]       # 格式如 2025
+                date_str = f"{year}-{date_part}"
+            else:
+                date_str = datetime.now().strftime("%Y-%m-%d")
+        
+        # 检查图片和资源
+        images_dir = os.path.join(article_dir, 'images')
         has_images = os.path.exists(images_dir) and len(os.listdir(images_dir)) > 0
+        images_count = len(os.listdir(images_dir)) if has_images else 0
+        
+        # 封面图检查
+        cover_path = os.path.join(article_dir, 'cover.jpg')
+        has_cover = os.path.exists(cover_path)
         
         # 缩略图路径
-        thumb_path = os.path.dirname(article_path) + '/thumb.jpg'
+        thumb_path = os.path.join(article_dir, 'thumb.jpg')
         has_thumb = os.path.exists(thumb_path)
         
-        return {
+        # 构建完整信息
+        article_info = {
             'path': article_path,
-            'title': title or '未知标题',
+            'title': title,
             'date': date_str,
             'has_images': has_images,
+            'images_count': images_count,
+            'has_cover': has_cover,
             'has_thumb': has_thumb,
             'content_length': len(content),
             'detected_at': datetime.now().isoformat()
         }
+        
+        # 如果有元信息，添加额外字段
+        if meta_info:
+            article_info.update({
+                'title_hook': meta_info.get('title_hook'),
+                'description': meta_info.get('article_description'),
+                'keywords': meta_info.get('keywords', []),
+                'cover_copy_text': meta_info.get('cover_copy_text'),
+                'product_count': meta_info.get('product_count', 0),
+                'issue_number': meta_info.get('issue_info', {}).get('issue_number'),
+                'generated_at': meta_info.get('generated_at'),
+                'has_meta': True
+            })
+        else:
+            article_info['has_meta'] = False
+        
+        return article_info
     
     except Exception as e:
         print(f"提取文章信息失败: {article_path}, 错误: {e}")

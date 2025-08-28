@@ -1,5 +1,18 @@
-2025-08-27|Creem 1.0|https://www.producthunt.com/products/creem
-2025-08-27|Draw A Fish|https://www.producthunt.com/products/draw-a-fish
-2025-08-27|Jotform Instagram Agent|https://www.producthunt.com/products/jotform
-2025-08-27|Pikto AI Studio|https://www.producthunt.com/products/piktochart
-2025-08-27|Tasker Builder|https://www.producthunt.com/products/tasker-builder
+2025-08-28|Webvizio for AI Coding Agents|https://www.producthunt.com/products/webvizio
+2025-08-28|Rube|https://www.producthunt.com/products/rube
+2025-08-28|SoWork: The Glow-Up Edition|https://www.producthunt.com/products/sowork
+2025-08-28|Trace|https://www.producthunt.com/products/trace-16
+2025-08-28|Roark|https://www.producthunt.com/products/roark
+2025-08-28|Gemini 2.5 Flash Image|https://www.producthunt.com/products/google
+2025-08-28|Conductor|https://www.producthunt.com/products/conductor-aa77ddef-e6d3-4805-a179-7b2e17b6e22e
+2025-08-28|Tot 2.0|https://www.producthunt.com/products/tot
+2025-08-28|NotchFlow|https://www.producthunt.com/products/notchflow
+2025-08-28|Hex Notebook Agent|https://www.producthunt.com/products/hex
+2025-08-28|NotchFlow|https://www.producthunt.com/products/notchflow
+2025-08-28|TaskGPT Mobile|https://www.producthunt.com/products/taskgpt-2
+2025-08-28|CodeX|https://www.producthunt.com/products/codex-6
+2025-08-28|Codalogy|https://www.producthunt.com/products/codalogy
+2025-08-28|Oppla AI IDE|https://www.producthunt.com/products/oppla-ai
+2025-08-28|doola: AI Co-Founder|https://www.producthunt.com/products/doola-ai-co-founder
+2025-08-28|Magic Sandbox|https://www.producthunt.com/products/magic-sandbox-2
+2025-08-28|Higgsfield Records|https://www.producthunt.com/products/higgsfield
