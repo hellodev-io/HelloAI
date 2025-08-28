@@ -1,0 +1,34 @@
+{
+  "detection_time": "2025-08-28T20:24:22.616489",
+  "total_changes": 1,
+  "articles": [
+    {
+      "path": "articles/2025/08-28/index.md",
+      "title": "AI终于能动手了！🔥 AI 产品头条 - 第 1 期 | 2025年08月28日",
+      "date": "2025-08-28",
+      "has_images": true,
+      "images_count": 15,
+      "has_cover": false,
+      "has_thumb": false,
+      "content_length": 12269,
+      "detected_at": "2025-08-28T20:24:22.616467",
+      "title_hook": "AI终于能动手了！🔥",
+      "description": "第1期 | 2025年08月28日精选AI神器：Rube让AI操作600+应用，Webvizio秒变非技术反馈为代码，Gemini新模型惊艳登场。",
+      "keywords": [
+        "AI Coding Assistants",
+        "automation",
+        "Productivity",
+        "Developer Tools",
+        "Artificial Intelligence",
+        "Remote Work",
+        "Calendar",
+        "Voice AI"
+      ],
+      "cover_copy_text": "💎 今日AI大爆发！",
+      "product_count": 18,
+      "issue_number": 1,
+      "generated_at": "2025-08-28T20:13:50.105724",
+      "has_meta": true
+    }
+  ]
+}

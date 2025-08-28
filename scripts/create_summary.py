@@ -24,7 +24,7 @@ def read_article_content(article_path: str) -> Optional[str]:
 
 
 def extract_article_summary(content: str) -> Dict:
-    """提取文章关键信息"""
+    """提取文章关键信息（兼容AI产品头条格式）"""
     lines = content.split('\n')
     
     # 提取标题
@@ -34,112 +34,233 @@ def extract_article_summary(content: str) -> Dict:
             title = line[2:].strip()
             break
     
-    # 提取统计信息（寻找📊 今日统计部分）
-    stats = {}
-    in_stats = False
-    for line in lines:
-        if '📊' in line and '今日统计' in line:
-            in_stats = True
-            continue
-        elif in_stats and line.startswith('---'):
-            break
-        elif in_stats and line.strip().startswith('-'):
-            # 解析统计行，如 "- 🚀 技术分享：X条"
-            match = re.search(r'- ([^：]+)：(\d+)条', line)
-            if match:
-                category = match.group(1).strip()
-                count = int(match.group(2))
-                stats[category] = count
+    # 检测文章类型
+    is_product_digest = '产品头条' in (title or '') or 'Product Hunt' in content
     
-    # 提取分类内容（统计各分类的项目）
-    categories = {}
-    current_category = None
-    current_items = []
-    
-    for line in lines:
-        # 检测分类标题
-        if line.startswith('## ') and any(emoji in line for emoji in ['🚀', '🛠️', '📰', '💡', '📸']):
-            if current_category and current_items:
-                categories[current_category] = current_items
-            current_category = line[3:].strip()
-            current_items = []
+    if is_product_digest:
+        # AI产品头条格式
+        product_count = 0
+        products = []
         
-        # 检测项目标题
-        elif line.startswith('### ') and current_category:
-            # 提取项目名称（去掉链接格式）
-            project_title = line[4:].strip()
-            # 去掉markdown链接格式 [title](url)
-            project_title = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', project_title)
-            current_items.append(project_title)
+        # 统计产品数量（查找产品标题格式）
+        for line in lines:
+            # 匹配产品标题格式，如 "### ProductName: Description" 或 "### 1. ProductName"
+            if line.startswith('### ') and not line.startswith('### 🎯') and not line.startswith('### 📊'):
+                product_count += 1
+                # 提取产品名称
+                product_line = line[4:].strip()  # 去掉 "### "
+                
+                # 如果有冒号，取冒号前的部分
+                if ':' in product_line:
+                    product_name = product_line.split(':', 1)[0].strip()
+                elif ' - ' in product_line:
+                    product_name = product_line.split(' - ', 1)[0].strip()
+                else:
+                    product_name = product_line
+                
+                # 去除数字前缀（如 "1. "）
+                product_name = re.sub(r'^\d+\.\s*', '', product_name)
+                # 去除链接格式
+                product_name = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', product_name)
+                products.append(product_name)
+        
+        # 提取开场白作为摘要
+        intro_text = ""
+        found_intro = False
+        for line in lines:
+            line = line.strip()
+            if line.startswith('#'):
+                continue
+            elif line and not line.startswith('##') and not found_intro and len(line) > 20:
+                intro_text = line[:100] + "..." if len(line) > 100 else line
+                found_intro = True
+                break
+        
+        return {
+            'title': title or '未知标题',
+            'type': 'product_digest',
+            'product_count': product_count,
+            'products': products[:5],  # 只显示前5个产品
+            'intro_text': intro_text,
+            'total_items': product_count,
+            'category_count': 1,
+            'stats': {'AI产品推荐': product_count}
+        }
     
-    # 添加最后一个分类
-    if current_category and current_items:
-        categories[current_category] = current_items
-    
-    # 统计总数
-    total_items = sum(len(items) for items in categories.values())
-    
-    return {
-        'title': title or '未知标题',
-        'stats': stats,
-        'categories': categories,
-        'total_items': total_items,
-        'category_count': len(categories)
-    }
+    else:
+        # 传统格式
+        # 提取统计信息（寻找📊 今日统计部分）
+        stats = {}
+        in_stats = False
+        for line in lines:
+            if '📊' in line and '今日统计' in line:
+                in_stats = True
+                continue
+            elif in_stats and line.startswith('---'):
+                break
+            elif in_stats and line.strip().startswith('-'):
+                # 解析统计行，如 "- 🚀 技术分享：X条"
+                match = re.search(r'- ([^：]+)：(\d+)条', line)
+                if match:
+                    category = match.group(1).strip()
+                    count = int(match.group(2))
+                    stats[category] = count
+        
+        # 提取分类内容（统计各分类的项目）
+        categories = {}
+        current_category = None
+        current_items = []
+        
+        for line in lines:
+            # 检测分类标题
+            if line.startswith('## ') and any(emoji in line for emoji in ['🚀', '🛠️', '📰', '💡', '📸']):
+                if current_category and current_items:
+                    categories[current_category] = current_items
+                current_category = line[3:].strip()
+                current_items = []
+            
+            # 检测项目标题
+            elif line.startswith('### ') and current_category:
+                # 提取项目名称（去掉链接格式）
+                project_title = line[4:].strip()
+                # 去掉markdown链接格式 [title](url)
+                project_title = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', project_title)
+                current_items.append(project_title)
+        
+        # 添加最后一个分类
+        if current_category and current_items:
+            categories[current_category] = current_items
+        
+        # 统计总数
+        total_items = sum(len(items) for items in categories.values())
+        
+        return {
+            'title': title or '未知标题',
+            'type': 'traditional',
+            'stats': stats,
+            'categories': categories,
+            'total_items': total_items,
+            'category_count': len(categories)
+        }
 
 
 def generate_social_summary(summary: Dict, article_date: str) -> Dict:
-    """生成社交媒体摘要"""
+    """生成社交媒体摘要（支持AI产品头条和传统格式）"""
     
-    # 微信公众号摘要（较详细）
-    wechat_summary = f"""🔥 HelloAI AI日报 - {article_date}
+    if summary.get('type') == 'product_digest':
+        # AI产品头条格式
+        product_count = summary.get('product_count', 0)
+        products = summary.get('products', [])
+        intro_text = summary.get('intro_text', '')
+        
+        # 微信公众号摘要（较详细）
+        wechat_summary = f"""🚀 HelloAI AI产品头条 - {article_date}
 
-今日为大家精选了 {summary['total_items']} 条优质技术内容：
+今日为大家精选了 {product_count} 个最新AI产品！
+
+{intro_text}
+
+🎯 今日精选产品包括：
+"""
+        
+        for i, product in enumerate(products[:5], 1):
+            wechat_summary += f"• {product}\n"
+        
+        if product_count > 5:
+            wechat_summary += f"• ...及其他 {product_count - 5} 个优质产品\n"
+        
+        wechat_summary += f"""
+每个产品都经过精心筛选，从创新性、实用性、技术深度等多个维度进行评估。
+
+👉 点击阅读完整内容，发现最新AI神器！
+
+#AI产品 #ProductHunt #HelloAI #人工智能"""
+
+        # 掘金摘要（中等长度）  
+        juejin_summary = f"""HelloAI AI产品头条 {article_date} | 今日精选 {product_count} 个AI产品
+
+🔥 Product Hunt 今日最热AI产品抢先看：
 
 """
-    
-    for category, items in summary['categories'].items():
-        if items:
-            wechat_summary += f"{category} {len(items)}条\n"
-    
-    wechat_summary += f"""
+        
+        for i, product in enumerate(products[:3], 1):
+            juejin_summary += f"{i}. {product}\n"
+        
+        if product_count > 3:
+            juejin_summary += f"...及其他 {product_count - 3} 个产品\n"
+            
+        juejin_summary += "\n更多精彩产品，点击查看完整推荐 👆"
+
+        # 知乎摘要（简洁版）
+        zhihu_summary = f"""HelloAI AI产品头条 {article_date}
+
+今日从 Product Hunt 精选了 {product_count} 个最新AI产品，涵盖开发工具、创作辅助、数据分析等多个领域。
+
+重点推荐："""
+        
+        if products:
+            zhihu_summary += f"\n• {products[0]}"
+        
+        zhihu_summary += f"\n\n完整产品列表和详细介绍请查看原文。"
+        
+        short_summary = f"HelloAI AI产品头条 {article_date} - 精选 {product_count} 个最新AI产品"
+
+    else:
+        # 传统格式
+        total_items = summary.get('total_items', 0)
+        categories = summary.get('categories', {})
+        
+        # 微信公众号摘要（较详细）
+        wechat_summary = f"""🔥 HelloAI AI日报 - {article_date}
+
+今日为大家精选了 {total_items} 条优质技术内容：
+
+"""
+        
+        for category, items in categories.items():
+            if items:
+                wechat_summary += f"{category} {len(items)}条\n"
+        
+        wechat_summary += f"""
 涵盖了开源项目、开发工具、技术动态等多个方面。每一条都经过精心筛选，确保对开发者有实际价值。
 
 👉 点击阅读完整内容，发现今日技术亮点！
 
 #AI日报 #人工智能 #HelloAI"""
 
-    # 掘金摘要（中等长度）
-    juejin_summary = f"""HelloAI 日报 {article_date} | 今日 {summary['total_items']} 条AI精选
+        # 掘金摘要（中等长度）
+        juejin_summary = f"""HelloAI 日报 {article_date} | 今日 {total_items} 条AI精选
 
 """
-    
-    top_categories = sorted(summary['categories'].items(), key=lambda x: len(x[1]), reverse=True)[:3]
-    for category, items in top_categories:
-        if items:
-            juejin_summary += f"• {category}: {items[0]}\n"
-    
-    juejin_summary += "\n更多精彩内容，点击查看完整日报 👆"
+        
+        top_categories = sorted(categories.items(), key=lambda x: len(x[1]), reverse=True)[:3]
+        for category, items in top_categories:
+            if items:
+                juejin_summary += f"• {category}: {items[0]}\n"
+        
+        juejin_summary += "\n更多精彩内容，点击查看完整日报 👆"
 
-    # 知乎摘要（简洁版）
-    zhihu_summary = f"""HelloAI AI行业日报 {article_date}
+        # 知乎摘要（简洁版）
+        zhihu_summary = f"""HelloAI AI行业日报 {article_date}
 
-今日精选 {summary['total_items']} 条AI技术资讯，包含AI研究、开源工具、行业动态等。
+今日精选 {total_items} 条AI技术资讯，包含AI研究、开源工具、行业动态等。
 
 重点推荐："""
-    
-    if summary['categories']:
-        first_category = list(summary['categories'].values())[0]
-        if first_category:
-            zhihu_summary += f"\n• {first_category[0]}"
-    
-    zhihu_summary += "\n\n详细内容请查看完整日报。"
+        
+        if categories:
+            first_category = list(categories.values())[0]
+            if first_category:
+                zhihu_summary += f"\n• {first_category[0]}"
+        
+        zhihu_summary += "\n\n详细内容请查看完整日报。"
+        
+        short_summary = f"HelloAI 日报 {article_date} - {total_items} 条精选AI资讯"
 
     return {
         'wechat': wechat_summary,
         'juejin': juejin_summary,
         'zhihu': zhihu_summary,
-        'short': f"HelloAI 日报 {article_date} - {summary['total_items']} 条精选AI资讯"
+        'short': short_summary
     }
 
 
@@ -227,15 +348,29 @@ def main():
     # 检查是否有命令行参数
     if len(sys.argv) > 1:
         # 直接处理命令行指定的文章
-        article_paths = sys.argv[1].strip().split()
+        # 支持多种输入格式：多行分隔或空格分隔
+        raw_input = sys.argv[1].strip()
+        
+        # 如果包含换行符，按行分割；否则按空格分割
+        if '\n' in raw_input:
+            article_paths = [line.strip() for line in raw_input.split('\n') if line.strip()]
+        else:
+            article_paths = [path.strip() for path in raw_input.split() if path.strip()]
+        
+        print(f"📝 接收到 {len(article_paths)} 个文章路径:")
+        for path in article_paths:
+            print(f"  - {path}")
+        
         articles_info = []
         
         for article_path in article_paths:
-            article_path = article_path.strip()
             if article_path:
                 info = create_article_info_from_path(article_path)
                 if info:
                     articles_info.append(info)
+                    print(f"  ✅ 解析成功: {info['title']}")
+                else:
+                    print(f"  ❌ 解析失败: {article_path}")
         
         if not articles_info:
             print("❌ 未能解析任何有效的文章")

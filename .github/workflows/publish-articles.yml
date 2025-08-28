@@ -48,7 +48,10 @@ jobs:
           LATEST_ARTICLE=$(find articles -name "index.md" -type f | sort -r | head -1)
           if [ -n "$LATEST_ARTICLE" ]; then
             echo "has-changes=true" >> $GITHUB_OUTPUT
-            echo "changed-articles=$LATEST_ARTICLE" >> $GITHUB_OUTPUT
+            # 使用多行输出格式确保路径正确传递
+            echo "changed-articles<<EOF" >> $GITHUB_OUTPUT
+            echo "$LATEST_ARTICLE" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
             echo "🚀 强制发布模式：将发布最后一篇文章"
             echo "📝 文章路径: $LATEST_ARTICLE"
           else
@@ -61,7 +64,10 @@ jobs:
           
           if [ -n "$CHANGED_FILES" ]; then
             echo "has-changes=true" >> $GITHUB_OUTPUT
-            echo "changed-articles=$CHANGED_FILES" >> $GITHUB_OUTPUT
+            # 使用换行符分隔多个文章路径，避免空格解析问题
+            echo "changed-articles<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
             echo "📝 检测到文章变更:"
             echo "$CHANGED_FILES"
           else

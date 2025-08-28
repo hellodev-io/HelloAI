@@ -151,6 +151,14 @@ def save_change_summary(articles_info: List[Dict]):
         json.dump(summary, f, ensure_ascii=False, indent=2)
     
     print(f"变更摘要已保存: {len(articles_info)} 篇文章")
+    
+    # 同时输出适合GitHub Actions使用的格式
+    if articles_info:
+        print("\n📋 GitHub Actions 输出格式:")
+        article_paths = [article['path'] for article in articles_info]
+        print("changed-articles:")
+        for path in article_paths:
+            print(f"  {path}")
 
 
 def main():
