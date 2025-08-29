@@ -18,3 +18,19 @@
 2025-08-29|Webvizio for AI Coding Agents|https://www.producthunt.com/products/webvizio
 2025-08-29|SoWork: The Glow-Up Edition|https://www.producthunt.com/products/sowork
 2025-08-29|Rube|https://www.producthunt.com/products/rube
+2025-08-30|Wanderboat 2.0|https://www.producthunt.com/products/wanderboat-2-0
+2025-08-30|Surf|https://www.producthunt.com/products/surf-9
+2025-08-30|HyNote AI|https://www.producthunt.com/products/ai-notebook-app
+2025-08-30|Contact Finder by Jeeva AI|https://www.producthunt.com/products/jeeva-ai
+2025-08-30|Codex by OpenAI|https://www.producthunt.com/products/openai
+2025-08-30|Optibase|https://www.producthunt.com/products/a-b-testing-for-webflow
+2025-08-30|Oh Dear|https://www.producthunt.com/products/oh-dear
+2025-08-30|KushoAI|https://www.producthunt.com/products/kushoai
+2025-08-30|Peony Dataroom|https://www.producthunt.com/products/peony-0-5
+2025-08-30|Streamdown by Vercel|https://www.producthunt.com/products/vercel
+2025-08-30|Streamdown by Vercel|https://www.producthunt.com/products/vercel
+2025-08-30|Grok Code Fast 1|https://www.producthunt.com/products/xai-api
+2025-08-30|Twistly|https://www.producthunt.com/products/twistly
+2025-08-30|Microsoft AI (MAI) Voice-1|https://www.producthunt.com/products/microsoft-copilot
+2025-08-30|Never lose your work again|https://www.producthunt.com/products/never-lose-your-work-again
+2025-08-30|LaunchMMO|https://www.producthunt.com/products/launchmmo
