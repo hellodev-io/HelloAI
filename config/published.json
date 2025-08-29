@@ -23,5 +23,30 @@
         "message": "未配置认证信息，跳过发布"
       }
     }
+  },
+  "2025/08-30/index.md": {
+    "title": "逆天了！AI带你边玩边吃！ AI 产品头条 - 第 2 期 | 2025年08月30日",
+    "content_hash": "",
+    "last_updated": "2025-08-30T03:08:27.290786",
+    "platforms": {
+      "wechat": {
+        "published": true,
+        "published_time": "2025-08-30T03:08:27.290786",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "juejin": {
+        "published": true,
+        "published_time": "2025-08-30T03:08:27.290786",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "zhihu": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      }
+    }
   }
 }
