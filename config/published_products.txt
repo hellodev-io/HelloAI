@@ -34,3 +34,7 @@
 2025-08-30|Microsoft AI (MAI) Voice-1|https://www.producthunt.com/products/microsoft-copilot
 2025-08-30|Never lose your work again|https://www.producthunt.com/products/never-lose-your-work-again
 2025-08-30|LaunchMMO|https://www.producthunt.com/products/launchmmo
+2025-08-31|Motion Software|https://www.producthunt.com/products/motion-software
+2025-08-31|Just Log|https://www.producthunt.com/products/just-log
+2025-08-31|Lindy Build|https://www.producthunt.com/products/lindy
+2025-08-31|AI Resume Screener by Hyring|https://www.producthunt.com/products/ai-interviewer-by-hyring
