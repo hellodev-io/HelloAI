@@ -48,5 +48,30 @@
         "message": "未配置认证信息，跳过发布"
       }
     }
+  },
+  "2025/08-31/index.md": {
+    "title": "逆天了！AI自动修Bug神器来了！ AI 产品头条 - 第 3 期 | 2025年08月31日",
+    "content_hash": "",
+    "last_updated": "2025-08-31T02:12:22.668880",
+    "platforms": {
+      "wechat": {
+        "published": true,
+        "published_time": "2025-08-31T02:12:22.668880",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "juejin": {
+        "published": true,
+        "published_time": "2025-08-31T02:12:22.668880",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "zhihu": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      }
+    }
   }
 }
