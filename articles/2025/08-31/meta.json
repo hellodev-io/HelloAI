@@ -1,28 +1,27 @@
 {
-  "title_hook": "逆天了！AI自动修Bug神器来了！",
-  "article_description": "第3期精选：AI自动修Bug、极简健身记录、4K录屏神器，提升效率的必备工具合集，错过可惜！",
+  "title_hook": "逆天了！谷歌Whisk 3.0发布！",
+  "article_description": "Google Whisk 3.0震撼上线，Precise Mode实现图像生成精准控制，结合Gemini 2.5 Flash带来创作新革命。",
   "cover_copy_text": "🔥 今日AI神器大爆发！",
   "keywords": [
-    "AI编程",
-    "屏幕录制",
-    "健身追踪",
-    "简历筛选",
-    "无代码开发",
-    "效率工具",
-    "Hiring AI",
-    "Motion Software"
+    "Google Whisk",
+    "Precise Mode",
+    "AI图像生成",
+    "Technical SEO MCP",
+    "Nuraform",
+    "AI表单",
+    "开发者工具"
   ],
-  "full_title": "# 逆天了！AI自动修Bug神器来了！ AI 产品头条 - 第 3 期 | 2025年08月31日",
-  "product_count": 4,
-  "generated_at": "2025-08-31T02:11:17.577772",
+  "full_title": "# 逆天了！谷歌Whisk 3.0发布！ AI 产品头条 - 第 4 期 | 2025年08月31日",
+  "product_count": 8,
+  "generated_at": "2025-08-31T16:39:25.498376",
   "publish_date": "2025-08-31",
   "issue_info": {
-    "issue_number": 3,
+    "issue_number": 4,
     "date_formatted": "2025年08月31日"
   },
   "content_stats": {
-    "content_length": 3704,
-    "has_cover": true,
-    "images_count": 4
+    "content_length": 6002,
+    "has_cover": false,
+    "images_count": 9
   }
 }

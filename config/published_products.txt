@@ -38,3 +38,11 @@
 2025-08-31|Just Log|https://www.producthunt.com/products/just-log
 2025-08-31|Lindy Build|https://www.producthunt.com/products/lindy
 2025-08-31|AI Resume Screener by Hyring|https://www.producthunt.com/products/ai-interviewer-by-hyring
+2025-08-31|Google Whisk 3.0|https://www.producthunt.com/products/google-labs
+2025-08-31|Technical SEO MCP|https://www.producthunt.com/products/technical-seo-mcp
+2025-08-31|Byterover 2.0|https://www.producthunt.com/products/byterover
+2025-08-31|Nuraform|https://www.producthunt.com/products/nuraform
+2025-08-31|UTCP Agent|https://www.producthunt.com/products/utcp
+2025-08-31|A01|https://www.producthunt.com/products/a01
+2025-08-31|Higgsfield Speak 2.0|https://www.producthunt.com/products/higgsfield
+2025-08-31|UseArticle|https://www.producthunt.com/products/usearticle-urls-to-affiliate-website
