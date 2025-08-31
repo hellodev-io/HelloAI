@@ -48,30 +48,5 @@
         "message": "未配置认证信息，跳过发布"
       }
     }
-  },
-  "2025/08-31/index.md": {
-    "title": "逆天了！谷歌Whisk 3.0发布！ AI 产品头条 - 第 4 期 | 2025年08月31日",
-    "content_hash": "",
-    "last_updated": "2025-08-31T16:58:41.449218",
-    "platforms": {
-      "wechat": {
-        "published": true,
-        "published_time": "2025-08-31T16:58:41.449218",
-        "status": "success",
-        "message": "成功发布 1/1 篇文章"
-      },
-      "juejin": {
-        "published": true,
-        "published_time": "2025-08-31T16:58:41.449218",
-        "status": "success",
-        "message": "成功发布 1/1 篇文章"
-      },
-      "zhihu": {
-        "published": false,
-        "published_time": null,
-        "status": "skipped",
-        "message": "未配置认证信息，跳过发布"
-      }
-    }
   }
 }
