@@ -46,3 +46,11 @@
 2025-08-31|A01|https://www.producthunt.com/products/a01
 2025-08-31|Higgsfield Speak 2.0|https://www.producthunt.com/products/higgsfield
 2025-08-31|UseArticle|https://www.producthunt.com/products/usearticle-urls-to-affiliate-website
+2025-09-02|xpander.ai|https://www.producthunt.com/products/xpander-ai
+2025-09-02|JoggAI AvatarX|https://www.producthunt.com/products/jogg-ai
+2025-09-02|Dhisana AI|https://www.producthunt.com/products/dhisana-ai
+2025-09-02|Genspark AI Designer|https://www.producthunt.com/products/genspark
+2025-09-02|GitHub Copilot for Raycast|https://www.producthunt.com/products/github-copilot
+2025-09-02|Lumi.new|https://www.producthunt.com/products/lumi-new-2
+2025-09-02|AbleMouse|https://www.producthunt.com/products/ablemouse-control-with-tongue-or-touch
+2025-09-02|fwt. axis|https://www.producthunt.com/products/fwt-axis
