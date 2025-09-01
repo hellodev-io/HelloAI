@@ -73,5 +73,30 @@
         "message": "未配置认证信息，跳过发布"
       }
     }
+  },
+  "2025/09-02/index.md": {
+    "title": "逆天了！AI员工上线了。 AI 产品头条 - 第 4 期 | 2025年09月02日",
+    "content_hash": "",
+    "last_updated": "2025-09-02T00:49:15.817821",
+    "platforms": {
+      "wechat": {
+        "published": true,
+        "published_time": "2025-09-02T00:49:15.817821",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "juejin": {
+        "published": true,
+        "published_time": "2025-09-02T00:49:15.817821",
+        "status": "success",
+        "message": "成功发布 1/1 篇文章"
+      },
+      "zhihu": {
+        "published": false,
+        "published_time": null,
+        "status": "skipped",
+        "message": "未配置认证信息，跳过发布"
+      }
+    }
   }
 }
