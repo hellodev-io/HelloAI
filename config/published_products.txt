@@ -54,3 +54,23 @@
 2025-09-02|Lumi.new|https://www.producthunt.com/products/lumi-new-2
 2025-09-02|AbleMouse|https://www.producthunt.com/products/ablemouse-control-with-tongue-or-touch
 2025-09-02|fwt. axis|https://www.producthunt.com/products/fwt-axis
+2025-09-03|Receiptor AI|https://www.producthunt.com/products/receiptor-ai
+2025-09-03|Google Finance Beta|https://www.producthunt.com/products/google-finance-beta
+2025-09-03|Bhava|https://www.producthunt.com/products/bhava
+2025-09-03|Copilot Audio Expressions|https://www.producthunt.com/products/the-new-microsoft-copilot
+2025-09-03|Upvoted|https://www.producthunt.com/products/upvoted-3
+2025-09-03|CatDoes|https://www.producthunt.com/products/catdoes-2
+2025-09-03|Bugster|https://www.producthunt.com/products/bugster
+2025-09-03|fileAI MCP|https://www.producthunt.com/products/fileai-ai-ocr
+2025-09-03|Floor796|https://www.producthunt.com/products/floor796
+2025-09-03|Ghost|https://www.producthunt.com/products/ghost-6
+2025-09-03|Ghost|https://www.producthunt.com/products/ghost-6
+2025-09-03|Coherence X5 for macOS|https://www.producthunt.com/products/unite-for-macos
+2025-09-03|Chronos for Jira|https://www.producthunt.com/products/chronos-for-jira
+2025-09-03|Guitar Wiz|https://www.producthunt.com/products/guitar-wiz
+2025-09-03|Compot|https://www.producthunt.com/products/compot
+2025-09-03|OAK|https://www.producthunt.com/products/open-agent-kit-build-agents-in-minutes
+2025-09-03|NoteWave|https://www.producthunt.com/products/notewave-3
+2025-09-03|SpatialChat|https://www.producthunt.com/products/spatialchat
+2025-09-03|Gromet|https://www.producthunt.com/products/gromet-python-automations-made-simple
+2025-09-03|ShareBox|https://www.producthunt.com/products/sharebox
