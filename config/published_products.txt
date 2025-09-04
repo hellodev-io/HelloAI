@@ -90,3 +90,23 @@
 2025-09-04|SnippSync|https://www.producthunt.com/products/snippsync
 2025-09-04|Mnemosphere AI|https://www.producthunt.com/products/mnemosphere
 2025-09-04|Locki|https://www.producthunt.com/products/locki-2
+2025-09-05|ClearCRM|https://www.producthunt.com/products/clearcrm
+2025-09-05|Incerto|https://www.producthunt.com/products/incerto
+2025-09-05|maestro by beatoven.ai|https://www.producthunt.com/products/beatoven-ai
+2025-09-05|Billing SDK|https://www.producthunt.com/products/dodo-payments
+2025-09-05|Web to MCP|https://www.producthunt.com/products/web-to-mcp
+2025-09-05|Spiral|https://www.producthunt.com/products/spiral-7
+2025-09-05|EasyCode|https://www.producthunt.com/products/easycode
+2025-09-05|VoxDeck|https://www.producthunt.com/products/voxdeck-2
+2025-09-05|Beplan|https://www.producthunt.com/products/beplan
+2025-09-05|Shotgun CLI|https://www.producthunt.com/products/shotgun-cli
+2025-09-05|Beplan|https://www.producthunt.com/products/beplan
+2025-09-05|No Cap Accelerate (nc/acc)|https://www.producthunt.com/products/socap
+2025-09-05|Instagram for iPad|https://www.producthunt.com/products/instagram
+2025-09-05|IndieDevs|https://www.producthunt.com/products/indiedevs
+2025-09-05|Mascotly|https://www.producthunt.com/products/mascotly-faces-sell-not-fonts
+2025-09-05|Opal for Schools|https://www.producthunt.com/products/opal
+2025-09-05|SnapShot|https://www.producthunt.com/products/snapshot-2
+2025-09-05|Timeslicer|https://www.producthunt.com/products/timeslicer
+2025-09-05|reMarkable Paper Pro Move|https://www.producthunt.com/products/remarkable-paper-pro
+2025-09-05|Ad Network by beehiiv|https://www.producthunt.com/products/beehiiv
